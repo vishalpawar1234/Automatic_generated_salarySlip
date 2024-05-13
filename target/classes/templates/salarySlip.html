@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Slip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .salary-slip {
+            max-width: 600px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .company-details, .employee-details, .salary-details, .footer {
+            margin-bottom: 20px;
+            color: #555555;
+        }
+
+        .company-details p, .employee-details p, .salary-details table th, .salary-details table td, .footer p {
+            margin: 5px 0;
+        }
+
+        .salary-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .salary-details th, .salary-details td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .salary-details th {
+            background-color: #5761bf;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+	<form>
+    <div class="salary-slip">
+        <div class="header">
+            <h2 style="color: #007bff;">Salary Slip</h2>
+        </div>
+
+        <div class="company-details">
+            <p><strong>Company Name:</strong> Finite4 Engineering & Consultancy</p>
+        </div>
+
+        <div class="employee-details">
+            <p><strong>Employee Name:</strong> <span th:text="${user.empName}"></span></p>
+            <p><strong>Employee ID:</strong> <span th:text="${user.id}"></span></p>
+            <p><strong>Joining Date:</strong> <span th:text="${user.joiningDate}"></span></p>
+        </div>
+
+       <div class="salary-details">
+    <h3>Salary Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Earnings</th>
+                <th>Amount (RS)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Basic Salary</td>
+                <td><span th:text="${user.basicSalary}"></span></td>
+            </tr>
+            <tr>
+                <td>Allowances</td>
+                <td><span th:text="${user.allowance}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Deductions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Deduction Type</th>
+                <th>Amount (RS)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tax</td>
+                <td><span th:text="${user.tax}"></span></td>
+            </tr>
+            <tr>
+                <td>Insurance</td>
+                <td><span th:text="${user.insurance}"></span></td>
+            </tr>
+            <tr>
+                <td>Other Deduction</td>
+                <td><span th:text="${user.otherDeduction}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="total">
+        <p><strong>Net Salary:</strong> <span th:text="${user.netSalary}"></span></p>
+    </div>
+</div>
+ <div class="footer">
+            <p>Generated on: <span th:text="${#dates.format(#dates.createNow(), 'dd-MM-yyyy')}"></span></p>
+        </div>
+        </div></form>
+</body>
+</html>

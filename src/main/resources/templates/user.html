@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+          <style>
+			  *, ::after, ::before {
+                box-sizing: content-box;
+                 }
+                 body{
+					 background-color: black;
+					 color: white;
+				 }
+		  </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Employee Salary Slip</a>
+
+  <!-- Toggler/collapsible Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/users}">Employee Details</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="margin-left: 250px;">
+    <div class="row">
+        <h1>Details of Employees</h1>
+    </div>
+
+    <div class="row">
+		<div class="col-lg-3">
+		    <a th:href="@{/users/new}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+		</div>
+	</div>
+
+    <table class="table table-striped table-bordered ">
+        <thead class="table-dark">
+        <tr>
+			<th>Employee_Id</th>
+            <th>Employee_Name</th>
+            <th>Email_Id</th>
+            <th>Joining_Date</th>
+            <th>Allowance</th>
+            <th>Basic_Salary</th>
+            <th>Insurance</th>
+            <th>Other_Deduction</th>
+            <th>Tax</th>
+            <th>Net_Salary</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>Salary_Slip</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+			<td th:text="${user.id}"></td>
+            <td th:text="${user.empName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.joiningDate}"></td>
+            <td th:text="${user.allowance}"></td>
+            <td th:text="${user.basicSalary}"></td>
+            <td th:text="${user.insurance}"></td>
+            <td th:text="${user.otherDeduction}"></td>
+            <td th:text="${user.tax}"></td>
+            <td th:text="${user.netSalary}"></td>
+
+            <td>
+               <a th:href="@{/users/edit/{id}(id=${user.id})}"
+               class="btn btn-primary">Update</a>
+               </td>
+               <td>
+                <a th:href="@{/users/{id}(id=${user.id})}"
+               class="btn btn-danger delete-btn">Delete</a>
+            </td>
+            
+            <td>
+				 <a th:href="@{/users/{id}/salarySlip(id=${user.id})}" class="btn btn-primary">View</a>
+			</td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteButtons = document.querySelectorAll('.delete-btn');
+        
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                var confirmation = confirm("Are you sure you want to  delete this employee?");
+                if (!confirmation) {
+                    event.preventDefault(); // Prevent the default action (deleting) if user clicks cancel
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
