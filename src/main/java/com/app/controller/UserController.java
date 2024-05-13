@@ -21,14 +21,14 @@ public class UserController {
 	private UserService userService;
 	
 	// GET request to display the login form
-    @GetMapping("/login")
+    @GetMapping("/index")
     public String showLoginForm(Model model) {
         model.addAttribute("user", new User());
         return "login";
     }
 	
 	// Cheaking for loging credentials
-	@PostMapping("/login")
+	@PostMapping("/index")
 	public String login(@ModelAttribute(name="user") User user,Model model) {
 		String username = user.getUsername();
 		String password = user.getPassword();
